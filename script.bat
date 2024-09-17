@@ -30,4 +30,4 @@ xcopy /e /i /h /y !usb_drive!\ "%destination%\"
 
 echo Copy completed.
 
-:if you want to stop the script after the copy, add "pause" at the end
+::if you want to stop the script after the copy, add "pause" at the end

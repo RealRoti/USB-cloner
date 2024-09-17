@@ -1,32 +1,33 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: Imposta la directory di destinazione per la copia
+:: Set copy destination directory
 set destination=C:\
 
 :check_drive
 cls
-echo In attesa dell'inserimento di una chiavetta USB...
+echo Waiting for USB...
 
-:: Controlla tutte le unità rimovibili disponibili
+:: Scan all removable devices available
 for /f "skip=1 tokens=1,2" %%a in ('wmic logicaldisk get drivetype^, deviceid') do (
     if "%%b"=="2" (
         set usb_drive=%%a
-        :: Verifica se l'unità contiene dei file (evita lettori vuoti)
+        :: Check if the drive contains files (avoid empty drives)
         if exist %%a\* (
             goto drive_found
         )
     )
 )
 
-:: Se non trova nessuna unità USB valida, riprova
+:: If no valid USB are found, retry in 5s
 timeout /t 5 /nobreak >nul
 goto check_drive
 
 :drive_found
-echo Unità USB rilevata: !usb_drive!
-echo Copio i file dalla chiavetta USB...
+echo USB Detected: !usb_drive!
+echo Copy in progress...
 xcopy /e /i /h /y !usb_drive!\ "%destination%\"
 
-echo Copia completata.
-pause
+echo Copy completed.
+
+:if you want to stop the script after the copy, add "pause" at the end

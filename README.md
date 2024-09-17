@@ -5,6 +5,7 @@ This project contains a batch script that automatically detects a USB drive and 
 ## Features
 - No admin permission required
 - Automatically detects and copies files from an inserted USB drive.
+- Automatically ignores USB drives connected that don't contain files (such as mouse, keyboard..)
 - Runs silently in the background using a VBScript.
 
 ## Installation
